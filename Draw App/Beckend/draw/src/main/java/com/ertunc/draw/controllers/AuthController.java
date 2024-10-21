@@ -1,6 +1,7 @@
 package com.ertunc.draw.controllers;
 
 import com.ertunc.draw.services.abstracts.AuthService;
+import com.ertunc.draw.services.dtos.requests.LoginRequest;
 import com.ertunc.draw.services.dtos.requests.RegisterRequest;
 import com.ertunc.draw.services.dtos.responses.RegisterResponse;
 import jakarta.validation.Valid;
@@ -17,7 +18,13 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("register")
-    public RegisterResponse register(@RequestBody @Valid RegisterRequest registerRequest){
+    public RegisterResponse register(@RequestBody @Valid RegisterRequest registerRequest) {
         return authService.register(registerRequest);
+    }
+
+    @PostMapping("login")
+    public String login(@RequestBody @Valid LoginRequest loginRequest) {
+        authService.login(loginRequest);
+        return "Giriş Başarılı";
     }
 }
